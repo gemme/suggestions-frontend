@@ -1,23 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
-
+import VirtualizedList from './VirtualizedList';
+import Suggestions from './Suggestions';
+import { useEffect, useState } from 'react';
 function App() {
+  const [suggestions, setSuggestions] = useState([]);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch('http://localhost:3001/resources/data.json')
+      .then(response => response.json())
+      .then(setData)
+      .catch(console.log);
+  }, []);
+  useEffect(() => {
+    fetch('http://localhost:3001/resources/suggestions.json')
+      .then(response => response.json())
+      .then(setSuggestions)
+      .catch(console.log);
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Suggestions suggestions={suggestions}/>
+      <VirtualizedList data={data}/>
     </div>
   );
 }
