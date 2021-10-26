@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 
-export default function Suggestions({suggestions}) {
+export default function Suggestions({suggestions, setSelected}) {
   return (
     <Stack spacing={2} sx={{ width: 300 }}>
       <Autocomplete
@@ -19,6 +19,10 @@ export default function Suggestions({suggestions}) {
               ...params.InputProps,
               type: 'search',
             }}
+            onSelect={(event) => {
+              console.log(event.target.value);
+              setSelected(event.target.value);
+          }}
           />
         )}
       />

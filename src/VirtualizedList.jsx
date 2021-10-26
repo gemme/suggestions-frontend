@@ -7,8 +7,6 @@ import { FixedSizeList } from 'react-window';
 
 function renderRow(props) {
   const { index, style, data,  } = props;
-    console.log('props', props);
-    console.log('dataaa', data);
   return (
     <ListItem style={style} key={index} component="div" disablePadding>
       <ListItemButton>
